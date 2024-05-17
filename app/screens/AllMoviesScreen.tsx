@@ -1,37 +1,19 @@
 import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { Text } from "app/components"
-import { Button } from "app/components"
-import { isRTL } from "../i18n"
+import { View, ViewStyle, TextStyle, ImageStyle } from "react-native"
+import { Text, Button } from "app/components"
+import AddMovie from "app/components/AddMovie"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 
-const welcomeLogo = require("../../assets/images/logo.png")
-const welcomeFace = require("../../assets/images/welcome-face.png")
+interface AllMoviesScreenProps extends AppStackScreenProps<"AllMovies"> {}
 
-interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {}
-
-export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeScreen({
-  navigation,
-}) {
-  const $bottomContainerInsets = useSafeAreaInsetsStyle(["bottom"])
-
+export const AllMoviesScreen: FC<AllMoviesScreenProps> = observer(function AllMoviesScreen() {
   return (
     <View style={$container}>
-      <View style={$topContainer}>
-        <Image style={$welcomeLogo} source={welcomeLogo} resizeMode="contain" />
-        <Text size="lg"> Welcome to the movies directory </Text>
-        <Image style={$welcomeFace} source={welcomeFace} resizeMode="contain" />
-      </View>
-
-      <View style={[$bottomContainer, $bottomContainerInsets]}>
-        <Button style={$buttonStyle} onPress={() => navigation.navigate("AllMovies")}>
-          {" "}
-          View Movies
-        </Button>
-      </View>
+      <Text size="lg"> Movies Screen </Text>
+      <AddMovie />
     </View>
   )
 })
@@ -69,19 +51,11 @@ const $bottomContainer: ViewStyle = {
   paddingHorizontal: spacing.lg,
   justifyContent: "center",
 }
+
 const $welcomeLogo: ImageStyle = {
   height: 88,
   width: "100%",
   marginBottom: spacing.xxl,
-}
-
-const $welcomeFace: ImageStyle = {
-  height: 169,
-  width: 269,
-  position: "absolute",
-  bottom: -47,
-  right: -80,
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
 }
 
 const $welcomeHeading: TextStyle = {
